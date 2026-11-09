@@ -1,0 +1,48 @@
+{
+  "attack": [
+    "T1562.001"
+  ],
+  "card_id": "chm-win-020",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-09-defense-evasion-scripts",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "ScriptBlockText": "powershell.file.script_block_text"
+      },
+      "query": "from * metadata _id, _index, _version | where powershell.file.script_block_text like \"*Add-MpPreference*\" and powershell.file.script_block_text like \"*ExclusionPath*\""
+    },
+    "kql": {
+      "error": "SigmaTransformationError: Unable to determine table name from rule",
+      "field_map": {
+        "ScriptBlockText": null
+      },
+      "query": null
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-020",
+      "sha256": "aa7cadfa6a1badba513fbc6f9b65fe6f2011bbd724514277e95bd05247bb36f1"
+    },
+    {
+      "doc_id": "rb-09-defense-evasion-scripts",
+      "sha256": "af78ea640e2ded4b37ae802f84bb710c17f5f42d6f6b3298cab12a1d16f61161"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "error",
+  "title": "Defender exclusion added by PowerShell",
+  "triage_tips": [],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

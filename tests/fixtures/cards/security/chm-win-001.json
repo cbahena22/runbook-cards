@@ -1,0 +1,98 @@
+{
+  "attack": [
+    "T1059.001"
+  ],
+  "card_id": "chm-win-001",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-001",
+        "end_line": 13,
+        "quote": "Image|endswith",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-001",
+        "end_line": 16,
+        "quote": "CommandLine|contains",
+        "start_line": 16
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "rb-01-powershell-alerts",
+        "end_line": 9,
+        "quote": "Decode the blob (base64, UTF-16LE) and read it before judging.",
+        "start_line": 9
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-001",
+        "end_line": 5,
+        "quote": "A PowerShell process was started with an encoded command argument.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "rb-01-powershell-alerts",
+        "end_line": 8,
+        "quote": "Fires when powershell.exe or pwsh.exe runs with -enc or -EncodedCommand.",
+        "start_line": 8
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "Image",
+    "CommandLine"
+  ],
+  "kind": "alert",
+  "model": "fixture",
+  "pack": "security",
+  "playbook_link": "rb-01-powershell-alerts",
+  "prompt_version": "fixture",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where (ends_with(process.executable.caseless, \"\\\\powershell.exe\") or ends_with(process.executable.caseless, \"\\\\pwsh.exe\")) and (process.command_line like \"* -enc *\" or process.command_line like \"* -EncodedCommand *\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where (FolderPath endswith \"\\\\powershell.exe\" or FolderPath endswith \"\\\\pwsh.exe\") and (ProcessCommandLine contains \" -enc \" or ProcessCommandLine contains \" -EncodedCommand \")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-001",
+      "sha256": "c19460a0bf9ca355bdd2627e466ee39b802d6fcf32ea40437254e1ecc1a1fd70"
+    },
+    {
+      "doc_id": "rb-01-powershell-alerts",
+      "sha256": "95be0682edc103c45d0faa5194f50d477c11242f968f80ffb10609f8a67e0387"
+    },
+    {
+      "doc_id": "rb-15-encoded-commands",
+      "sha256": "51a364845d8a0d1ed862be6d2d7f1cd97bb8d49476f782ccc8e8a80f780f6cb7"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "Encoded PowerShell command line",
+  "triage_tips": [
+    "Decode the blob (base64, UTF-16LE) and read it before judging."
+  ],
+  "what_it_is": "A PowerShell process was started with an encoded command argument.",
+  "why_it_flags": "It fires when powershell.exe or pwsh.exe runs with -enc or -EncodedCommand."
+}

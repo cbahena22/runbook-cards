@@ -1,0 +1,50 @@
+{
+  "attack": [
+    "T1218.010"
+  ],
+  "card_id": "chm-win-012",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-07-signed-binary-proxy",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\regsvr32.exe\") and (process.command_line like \"*scrobj.dll*\" or process.command_line like \"*/i:*\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\regsvr32.exe\" and (ProcessCommandLine contains \"scrobj.dll\" or ProcessCommandLine contains \"/i:\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-012",
+      "sha256": "b876d14980365253844b0f8e22e3df36e89a5144aa8e9b5d60ab4ee2f9339efe"
+    },
+    {
+      "doc_id": "rb-07-signed-binary-proxy",
+      "sha256": "0293354e84f1b60bc185f21d3ea5276fa3b1fe07042695e36c3e5376d9d86afd"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "unsupported",
+  "title": "Regsvr32 loading a scriptlet",
+  "triage_tips": [],
+  "unsupported_after": 1,
+  "unsupported_before": 2,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

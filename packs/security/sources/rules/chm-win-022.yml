@@ -1,0 +1,22 @@
+title: Mimikatz command in a script block
+id: e4161dae-10ff-5bb2-8543-a2444c4a8c60
+name: chm-win-022
+status: test
+description: A script block calling Invoke-Mimikatz or DumpCreds.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: ps_script
+  product: windows
+detection:
+  selection:
+    ScriptBlockText|contains:
+    - Invoke-Mimikatz
+    - DumpCreds
+  condition: selection
+falsepositives:
+- Authorised red team exercises
+level: critical
+tags:
+- attack.credential_access
+- attack.t1003.001

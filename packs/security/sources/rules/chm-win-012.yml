@@ -1,0 +1,23 @@
+title: Regsvr32 loading a scriptlet
+id: a0bab5f6-afc7-529d-9feb-b6bd2dd37798
+name: chm-win-012
+status: test
+description: regsvr32.exe with scrobj.dll, the squiblydoo pattern.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \regsvr32.exe
+    CommandLine|contains:
+    - scrobj.dll
+    - '/i:'
+  condition: selection
+falsepositives:
+- None known
+level: high
+tags:
+- attack.defense_evasion
+- attack.t1218.010

@@ -1,0 +1,23 @@
+title: Firewall turned off with netsh
+id: 841af6dc-f871-5d5a-906a-71c31baba923
+name: chm-win-017
+status: test
+description: netsh advfirewall set to state off.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \netsh.exe
+    CommandLine|contains|all:
+    - advfirewall
+    - state off
+  condition: selection
+falsepositives:
+- Troubleshooting by IT
+level: medium
+tags:
+- attack.defense_evasion
+- attack.t1562.004

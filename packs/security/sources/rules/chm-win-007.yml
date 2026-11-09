@@ -1,0 +1,24 @@
+title: WMIC remote process creation
+id: 20559855-0662-52c8-9ab8-753fc1f88ad4
+name: chm-win-007
+status: test
+description: wmic.exe used to create a process, often for lateral movement.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \wmic.exe
+    CommandLine|contains|all:
+    - process
+    - call
+    - create
+  condition: selection
+falsepositives:
+- Old management scripts
+level: medium
+tags:
+- attack.execution
+- attack.t1047

@@ -1,0 +1,50 @@
+{
+  "attack": [
+    "T1482"
+  ],
+  "card_id": "chm-win-018",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-12-discovery-commands",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\nltest.exe\") and (process.command_line like \"*/domain_trusts*\" or process.command_line like \"*/dclist*\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\nltest.exe\" and (ProcessCommandLine contains \"/domain_trusts\" or ProcessCommandLine contains \"/dclist\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-018",
+      "sha256": "f5c6d387e05da6e1f637c45fd30fafd728b255b8460692ac6f36ccfa59dbd3c2"
+    },
+    {
+      "doc_id": "rb-12-discovery-commands",
+      "sha256": "20a6cafb1068a35b86d92729054882ebc69df1736cf00d98ca4148f9d3cfb96d"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "error",
+  "title": "Domain trust discovery with nltest",
+  "triage_tips": [],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

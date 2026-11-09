@@ -1,0 +1,23 @@
+title: Process memory dump via comsvcs
+id: 2912b923-1c32-5070-bc27-24fb4781f6d9
+name: chm-win-005
+status: test
+description: rundll32 calling the MiniDump export of comsvcs.dll.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \rundll32.exe
+    CommandLine|contains|all:
+    - comsvcs
+    - MiniDump
+  condition: selection
+falsepositives:
+- None known
+level: high
+tags:
+- attack.credential_access
+- attack.t1003.001

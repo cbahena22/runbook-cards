@@ -1,0 +1,23 @@
+title: Bitsadmin transfer job
+id: fde483b5-75a2-5ada-953d-e81bdab7b0d2
+name: chm-win-004
+status: test
+description: bitsadmin.exe creating a transfer job.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \bitsadmin.exe
+    CommandLine|contains:
+    - /transfer
+    - /addfile
+  condition: selection
+falsepositives:
+- Legacy update scripts
+level: medium
+tags:
+- attack.defense_evasion
+- attack.t1197

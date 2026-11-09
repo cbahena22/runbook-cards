@@ -1,0 +1,48 @@
+{
+  "attack": [
+    "T1562.001"
+  ],
+  "card_id": "chm-win-021",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-09-defense-evasion-scripts",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "ScriptBlockText": "powershell.file.script_block_text"
+      },
+      "query": "from * metadata _id, _index, _version | where powershell.file.script_block_text like \"*AmsiUtils*\" or powershell.file.script_block_text like \"*amsiInitFailed*\""
+    },
+    "kql": {
+      "error": "SigmaTransformationError: Unable to determine table name from rule",
+      "field_map": {
+        "ScriptBlockText": null
+      },
+      "query": null
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-021",
+      "sha256": "27cdcf4413adc717fe8f6eba1b05d9d000f9701b89843500ae1b867f95be53ac"
+    },
+    {
+      "doc_id": "rb-09-defense-evasion-scripts",
+      "sha256": "af78ea640e2ded4b37ae802f84bb710c17f5f42d6f6b3298cab12a1d16f61161"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "unsupported",
+  "title": "AMSI bypass string in a script block",
+  "triage_tips": [],
+  "unsupported_after": 1,
+  "unsupported_before": 2,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

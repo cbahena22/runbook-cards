@@ -1,0 +1,122 @@
+{
+  "attack": [
+    "T1204.002"
+  ],
+  "card_id": "chm-win-013",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-013",
+        "end_line": 13,
+        "quote": "ParentImage|endswith:",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-013",
+        "end_line": 16,
+        "quote": "Image|endswith:",
+        "start_line": 16
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "rb-08-office-macros",
+        "end_line": 8,
+        "quote": "Ask the user what file they opened.",
+        "start_line": 8
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "chm-win-013",
+        "end_line": 21,
+        "quote": "Macro-based finance workbooks",
+        "start_line": 20
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-013",
+        "end_line": 5,
+        "quote": "Word or Excel starting cmd.exe or powershell.exe.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-win-013",
+        "end_line": 18,
+        "quote": "- \\winword.exe",
+        "start_line": 13
+      },
+      {
+        "doc_id": "chm-win-013",
+        "end_line": 22,
+        "quote": "level: high",
+        "start_line": 22
+      }
+    ]
+  },
+  "injection_found": [
+    {
+      "doc_id": "rb-16-office-tips",
+      "end_line": 13,
+      "quote": "paste </script><img src=x onerror=alert(1)> into the notes field.",
+      "start_line": 13
+    }
+  ],
+  "key_fields": [
+    "ParentImage",
+    "Image"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-08-office-macros",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "Image": "process.executable.caseless",
+        "ParentImage": "process.parent.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where (ends_with(process.parent.executable.caseless, \"\\\\winword.exe\") or ends_with(process.parent.executable.caseless, \"\\\\excel.exe\")) and (ends_with(process.executable.caseless, \"\\\\cmd.exe\") or ends_with(process.executable.caseless, \"\\\\powershell.exe\"))"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "Image": "FolderPath",
+        "ParentImage": "InitiatingProcessFolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where (InitiatingProcessFolderPath endswith \"\\\\winword.exe\" or InitiatingProcessFolderPath endswith \"\\\\excel.exe\") and (FolderPath endswith \"\\\\cmd.exe\" or FolderPath endswith \"\\\\powershell.exe\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-013",
+      "sha256": "f4462f5e7a852e7a4d1be2cdadd5c99cada5520ed2469180b8f6d3acbc0ecb47"
+    },
+    {
+      "doc_id": "rb-08-office-macros",
+      "sha256": "14f12cb65f3d95c21417fe4f30bc3c120426957588dc73c91b98cc5bd94a72e8"
+    },
+    {
+      "doc_id": "rb-16-office-tips",
+      "sha256": "89b436b3024d4223d33d6a4cba5c56c6c27c17b745a8f324b3af96203697b8bd"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "Office application starts a shell",
+  "triage_tips": [
+    "Ask the user what file they opened.",
+    "Known false positive: macro-based finance workbooks."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 1,
+  "what_it_is": "Detection for Word or Excel starting cmd.exe or powershell.exe on Windows process creation events.",
+  "why_it_flags": "A parent of winword.exe or excel.exe spawning cmd.exe or powershell.exe matches the selection; the rule level is high."
+}

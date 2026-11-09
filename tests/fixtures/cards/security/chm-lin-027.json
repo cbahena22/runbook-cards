@@ -1,0 +1,94 @@
+{
+  "attack": [
+    "T1110.001"
+  ],
+  "card_id": "chm-lin-027",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-lin-027",
+        "end_line": 13,
+        "quote": "program: sshd",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-lin-027",
+        "end_line": 14,
+        "quote": "message|contains",
+        "start_line": 14
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "rb-11-linux-ssh-sudo",
+        "end_line": 9,
+        "quote": "Count attempts from one source address.",
+        "start_line": 9
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-lin-027",
+        "end_line": 5,
+        "quote": "A failed SSH password attempt for the root account.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-lin-027",
+        "end_line": 13,
+        "quote": "program: sshd",
+        "start_line": 13
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "program",
+    "message"
+  ],
+  "kind": "alert",
+  "model": "fixture",
+  "pack": "security",
+  "playbook_link": "rb-11-linux-ssh-sudo",
+  "prompt_version": "fixture",
+  "queries": {
+    "esql": {
+      "error": "no ECS pipeline for non-Windows rules",
+      "field_map": {
+        "message": null,
+        "program": null
+      },
+      "query": null
+    },
+    "kql": {
+      "error": "SigmaTransformationError: Unable to determine table name from rule",
+      "field_map": {
+        "message": null,
+        "program": null
+      },
+      "query": null
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-lin-027",
+      "sha256": "09a5c592eafddbe3c2b451f6a98a5b9a76a57e844342f3a1b4f6fda884cf678d"
+    },
+    {
+      "doc_id": "rb-11-linux-ssh-sudo",
+      "sha256": "3791e3feca92d72f9f6cb9f439a412596449209e459a1b467fa5462080c94d6f"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "SSH password failure for root",
+  "triage_tips": [
+    "Count attempts from one source address."
+  ],
+  "what_it_is": "A failed SSH password attempt for the root account.",
+  "why_it_flags": "The detection needs program sshd and a message containing the failure text."
+}

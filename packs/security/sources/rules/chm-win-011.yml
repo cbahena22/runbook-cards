@@ -1,0 +1,23 @@
+title: Mshta running remote content
+id: 0b76a08e-0227-5d12-b9aa-098921f5b76a
+name: chm-win-011
+status: test
+description: mshta.exe given an http or https address.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \mshta.exe
+    CommandLine|contains:
+    - http://
+    - https://
+  condition: selection
+falsepositives:
+- None known
+level: high
+tags:
+- attack.defense_evasion
+- attack.t1218.005

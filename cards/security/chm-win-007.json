@@ -1,0 +1,114 @@
+{
+  "attack": [
+    "T1047"
+  ],
+  "card_id": "chm-win-007",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-007",
+        "end_line": 13,
+        "quote": "Image|endswith: \\wmic.exe",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-007",
+        "end_line": 14,
+        "quote": "CommandLine|contains|all:",
+        "start_line": 14
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "rb-05-lateral-movement",
+        "end_line": 8,
+        "quote": "If /node: is present the target is another host.",
+        "start_line": 8
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "chm-win-007",
+        "end_line": 20,
+        "quote": "Old management scripts",
+        "start_line": 19
+      }
+    ],
+    "triage_tips[2]": [
+      {
+        "doc_id": "chm-win-007",
+        "end_line": 24,
+        "quote": "level: medium",
+        "start_line": 21
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-007",
+        "end_line": 5,
+        "quote": "wmic.exe used to create a process, often for lateral movement.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-win-007",
+        "end_line": 17,
+        "quote": "Image|endswith: \\wmic.exe",
+        "start_line": 13
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "Image",
+    "CommandLine"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-05-lateral-movement",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\wmic.exe\") and process.command_line like \"*process*\" and process.command_line like \"*call*\" and process.command_line like \"*create*\""
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\wmic.exe\" and (ProcessCommandLine contains \"process\" and ProcessCommandLine contains \"call\" and ProcessCommandLine contains \"create\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-007",
+      "sha256": "342145160b66c70e876cec5381c16107fb6f5cfea6f1b94ec5593c9764acc216"
+    },
+    {
+      "doc_id": "rb-05-lateral-movement",
+      "sha256": "fb9bbc8865eadc57e04951d842c188c50d232982c084133ffaefbd6ec0238ba9"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "WMIC remote process creation",
+  "triage_tips": [
+    "Check CommandLine for /node: - if present, the target is another host.",
+    "Known false positive: old management scripts. Check for these first.",
+    "Severity is medium; maps to attack.execution, t1047."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "Sigma rule that fires when wmic.exe runs with process, call and create in its command line, often used for lateral movement.",
+  "why_it_flags": "A process_creation event has Image ending in \\wmic.exe and a CommandLine containing all of: process, call, create."
+}

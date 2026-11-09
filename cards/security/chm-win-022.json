@@ -1,0 +1,48 @@
+{
+  "attack": [
+    "T1003.001"
+  ],
+  "card_id": "chm-win-022",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-13-credential-tool-notes",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "ScriptBlockText": "powershell.file.script_block_text"
+      },
+      "query": "from * metadata _id, _index, _version | where powershell.file.script_block_text like \"*Invoke-Mimikatz*\" or powershell.file.script_block_text like \"*DumpCreds*\""
+    },
+    "kql": {
+      "error": "SigmaTransformationError: Unable to determine table name from rule",
+      "field_map": {
+        "ScriptBlockText": null
+      },
+      "query": null
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-022",
+      "sha256": "8e32067472954d6871815083e8889eb3dd27ec28f81f84e13f94e0360fabdaf0"
+    },
+    {
+      "doc_id": "rb-13-credential-tool-notes",
+      "sha256": "90af0000d6f47651e839353df2596199f2f9290f89ec4ce36501ff19c612d8a1"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "validator",
+  "title": "Mimikatz command in a script block",
+  "triage_tips": [],
+  "unsupported_after": 1,
+  "unsupported_before": 1,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

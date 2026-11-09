@@ -1,0 +1,23 @@
+title: Local user discovery with whoami privileges
+id: 16d07f7f-a7ab-5e91-817d-7b25299d53ff
+name: chm-win-019
+status: test
+description: whoami.exe asked for privileges or groups.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \whoami.exe
+    CommandLine|contains:
+    - /priv
+    - /groups
+  condition: selection
+falsepositives:
+- Admin troubleshooting
+level: low
+tags:
+- attack.discovery
+- attack.t1033

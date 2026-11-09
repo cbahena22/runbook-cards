@@ -1,0 +1,50 @@
+{
+  "attack": [
+    "T1021.001"
+  ],
+  "card_id": "chm-win-026",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-10-logon-events",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "EventID": "event.code",
+        "LogonType": "winlog.event_data.LogonType"
+      },
+      "query": "from * metadata _id, _index, _version | where winlog.channel==\"Security\" and event.code==\"4624\" and winlog.event_data.LogonType==\"10\""
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "EventID": null,
+        "LogonType": null
+      },
+      "query": "DeviceLogonEvents\n| where LogonType == 10"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-026",
+      "sha256": "6551bf38a8d19fad6aa7016a80da531644080164ffc10d672d15d6eb9d8089bf"
+    },
+    {
+      "doc_id": "rb-10-logon-events",
+      "sha256": "2c49db2ec96cf36ede9d60511c69c5858f8f3d13e760315538eaabdfa23db6f5"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "error",
+  "title": "Remote desktop logon",
+  "triage_tips": [],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

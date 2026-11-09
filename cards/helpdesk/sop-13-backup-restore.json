@@ -1,0 +1,129 @@
+{
+  "card_id": "sop-13-backup-restore",
+  "checks": [
+    "Approval recorded.",
+    "Restore went to a temporary folder."
+  ],
+  "citations": {
+    "checks[0]": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 14,
+        "quote": "Check: Approval recorded; restore went to a temporary folder.",
+        "start_line": 14
+      }
+    ],
+    "checks[1]": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 14,
+        "quote": "restore went to a temporary folder",
+        "start_line": 14
+      }
+    ],
+    "escalate_to": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 15,
+        "quote": "Escalate to: Backup owner",
+        "start_line": 15
+      }
+    ],
+    "steps[0]": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 7,
+        "quote": "Get the exact file path and the date it was last good.",
+        "start_line": 7
+      }
+    ],
+    "steps[1]": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 8,
+        "quote": "Check the requester owns the file or has the owner's approval.",
+        "start_line": 8
+      }
+    ],
+    "steps[2]": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 9,
+        "quote": "Open the backup console and find the snapshot.",
+        "start_line": 9
+      }
+    ],
+    "steps[3]": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 10,
+        "quote": "Restore to a temporary folder, never over the original.",
+        "start_line": 10
+      }
+    ],
+    "steps[4]": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 11,
+        "quote": "Tell the requester where to find it.",
+        "start_line": 11
+      }
+    ],
+    "steps[5]": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 12,
+        "quote": "Delete the temporary copy after 7 days.",
+        "start_line": 12
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 4,
+        "quote": "Purpose: restore a file from backup.",
+        "start_line": 4
+      }
+    ],
+    "when_to_use": [
+      {
+        "doc_id": "sop-13-backup-restore",
+        "end_line": 7,
+        "quote": "Get the exact file path and the date it was last good.",
+        "start_line": 7
+      }
+    ]
+  },
+  "escalate_to": "Backup owner",
+  "injection_found": [],
+  "kind": "procedure",
+  "model": "claude-sonnet-5-5",
+  "pack": "helpdesk",
+  "playbook_link": "sop-07-leaver-account",
+  "prompt_version": "p2",
+  "source_shas": [
+    {
+      "doc_id": "sop-13-backup-restore",
+      "sha256": "193c06e05271c0ca8441ee0d6da83dab96a797384ce6993847f32126b7835171"
+    },
+    {
+      "doc_id": "sop-07-leaver-account",
+      "sha256": "7631c641b366372b4de8a69ad2581a43edf02018b739bc3b2e4082a433260338"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "steps": [
+    "Get the exact file path and the date it was last good.",
+    "Check the requester owns the file or has the owner's approval.",
+    "Open the backup console and find the snapshot.",
+    "Restore to a temporary folder, never over the original.",
+    "Tell the requester where to find it.",
+    "Delete the temporary copy after 7 days."
+  ],
+  "title": "Restore a file from backup",
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "Procedure for restoring a file from backup.",
+  "when_to_use": "When a requester needs a file restored from backup and gives its path and the date it was last good."
+}

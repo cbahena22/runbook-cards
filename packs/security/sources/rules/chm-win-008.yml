@@ -1,0 +1,23 @@
+title: Scheduled task created from a user folder
+id: b82391a0-ce61-581c-87dc-5fbd029f640b
+name: chm-win-008
+status: test
+description: schtasks.exe creating a task that runs a file from a user-writable path.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \schtasks.exe
+    CommandLine|contains|all:
+    - /create
+    - \AppData\
+  condition: selection
+falsepositives:
+- Per-user updaters
+level: medium
+tags:
+- attack.persistence
+- attack.t1053.005

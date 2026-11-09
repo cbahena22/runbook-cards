@@ -1,0 +1,120 @@
+{
+  "attack": [
+    "T1136.001"
+  ],
+  "card_id": "chm-win-010",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-010",
+        "end_line": 13,
+        "quote": "Image|endswith:",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-010",
+        "end_line": 16,
+        "quote": "CommandLine|contains|all:",
+        "start_line": 16
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "rb-06-persistence-accounts",
+        "end_line": 16,
+        "quote": "Compare with the helpdesk change calendar.",
+        "start_line": 16
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "chm-win-010",
+        "end_line": 21,
+        "quote": "Helpdesk scripts for lab machines",
+        "start_line": 21
+      }
+    ],
+    "triage_tips[2]": [
+      {
+        "doc_id": "chm-win-010",
+        "end_line": 18,
+        "quote": "CommandLine|contains|all:",
+        "start_line": 13
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-010",
+        "end_line": 5,
+        "quote": "net.exe or net1.exe adding a local user.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-win-010",
+        "end_line": 18,
+        "quote": "CommandLine|contains|all:",
+        "start_line": 13
+      },
+      {
+        "doc_id": "chm-win-010",
+        "end_line": 25,
+        "quote": "attack.t1136.001",
+        "start_line": 22
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "Image",
+    "CommandLine"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-06-persistence-accounts",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where (ends_with(process.executable.caseless, \"\\\\net.exe\") or ends_with(process.executable.caseless, \"\\\\net1.exe\")) and process.command_line like \"*user*\" and process.command_line like \"*/add*\""
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where (FolderPath endswith \"\\\\net.exe\" or FolderPath endswith \"\\\\net1.exe\") and (ProcessCommandLine contains \"user\" and ProcessCommandLine contains \"/add\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-010",
+      "sha256": "6a0e96bd6b158bf113cbcf619c1d8af680aed4f0f1c6eefaf24727fe578fceb8"
+    },
+    {
+      "doc_id": "rb-06-persistence-accounts",
+      "sha256": "267c0e8acf8f1dd3c0397e8f2a7550a8918d7643c896a23afc5af9016eb05473"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "Local account added from the command line",
+  "triage_tips": [
+    "Compare with the helpdesk change calendar.",
+    "Known false positive: helpdesk scripts for lab machines.",
+    "Check Image is net.exe or net1.exe and read the CommandLine for the user and /add."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 1,
+  "what_it_is": "Process-creation rule that detects net.exe or net1.exe adding a local user from the command line.",
+  "why_it_flags": "Image ends with net.exe or net1.exe and the CommandLine contains both \"user\" and \"/add\". Tagged persistence, T1136.001; level medium."
+}

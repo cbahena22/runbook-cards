@@ -1,0 +1,25 @@
+title: Office application starts a shell
+id: 9c97084b-042c-50cd-9529-38feef429991
+name: chm-win-013
+status: test
+description: Word or Excel starting cmd.exe or powershell.exe.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    ParentImage|endswith:
+    - \winword.exe
+    - \excel.exe
+    Image|endswith:
+    - \cmd.exe
+    - \powershell.exe
+  condition: selection
+falsepositives:
+- Macro-based finance workbooks
+level: high
+tags:
+- attack.execution
+- attack.t1204.002

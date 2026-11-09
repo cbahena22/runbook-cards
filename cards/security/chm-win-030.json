@@ -1,0 +1,107 @@
+{
+  "attack": [
+    "T1569.002"
+  ],
+  "card_id": "chm-win-030",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-030",
+        "end_line": 14,
+        "quote": "ParentImage|endswith: \\services.exe",
+        "start_line": 14
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-030",
+        "end_line": 15,
+        "quote": "Image|contains: \\Windows\\Temp\\",
+        "start_line": 15
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "chm-win-030",
+        "end_line": 18,
+        "quote": "None known",
+        "start_line": 17
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "chm-win-030",
+        "end_line": 6,
+        "quote": "A process named by a random service launched from the Windows temp folder",
+        "start_line": 5
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-030",
+        "end_line": 6,
+        "quote": "A process named by a random service launched from the Windows temp folder",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-win-030",
+        "end_line": 15,
+        "quote": "ParentImage|endswith: \\services.exe",
+        "start_line": 14
+      },
+      {
+        "doc_id": "chm-win-030",
+        "end_line": 22,
+        "quote": "level: high",
+        "start_line": 19
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "ParentImage",
+    "Image"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": null,
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "Image": "process.executable.caseless",
+        "ParentImage": "process.parent.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.parent.executable.caseless, \"\\\\services.exe\") and process.executable.caseless like \"*\\\\Windows\\\\Temp\\\\*\""
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "Image": "FolderPath",
+        "ParentImage": "InitiatingProcessFolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where InitiatingProcessFolderPath endswith \"\\\\services.exe\" and FolderPath contains \"\\\\Windows\\\\Temp\\\\\""
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-030",
+      "sha256": "9e1af5da0cb20e304f82c283d4290ab394a61bf75aee2546d658dc78a38093cc"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "Remote service created for execution",
+  "triage_tips": [
+    "Rule lists no known false positives, so treat a hit as suspicious until shown otherwise.",
+    "Check the Image path under \\Windows\\Temp\\ and whether its name looks random."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "Windows process_creation detection: a process named by a random service launched from the Windows temp folder through services.exe.",
+  "why_it_flags": "Fires when the parent image ends with \\services.exe and the child image path contains \\Windows\\Temp\\. Rated high; tagged execution, t1569.002."
+}

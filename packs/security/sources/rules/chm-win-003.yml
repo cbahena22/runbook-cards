@@ -1,0 +1,23 @@
+title: Certutil used to fetch a file
+id: 9f844ced-c124-5814-ae27-aa307c9bcd4e
+name: chm-win-003
+status: test
+description: certutil.exe with urlcache or verifyctl arguments, a known download trick.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \certutil.exe
+    CommandLine|contains:
+    - urlcache
+    - verifyctl
+  condition: selection
+falsepositives:
+- Rare certificate tasks by admins
+level: high
+tags:
+- attack.command_and_control
+- attack.t1105

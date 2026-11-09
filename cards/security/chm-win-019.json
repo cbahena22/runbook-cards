@@ -1,0 +1,120 @@
+{
+  "attack": [
+    "T1033"
+  ],
+  "card_id": "chm-win-019",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-019",
+        "end_line": 13,
+        "quote": "Image|endswith: \\whoami.exe",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-019",
+        "end_line": 14,
+        "quote": "CommandLine|contains:",
+        "start_line": 14
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "chm-win-019",
+        "end_line": 19,
+        "quote": "Admin troubleshooting",
+        "start_line": 18
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "rb-12-discovery-commands",
+        "end_line": 15,
+        "quote": "Common first step after a foothold.",
+        "start_line": 14
+      }
+    ],
+    "triage_tips[2]": [
+      {
+        "doc_id": "chm-win-019",
+        "end_line": 20,
+        "quote": "level: low",
+        "start_line": 20
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-019",
+        "end_line": 5,
+        "quote": "whoami.exe asked for privileges or groups.",
+        "start_line": 5
+      },
+      {
+        "doc_id": "chm-win-019",
+        "end_line": 9,
+        "quote": "category: process_creation",
+        "start_line": 8
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-win-019",
+        "end_line": 16,
+        "quote": "Image|endswith: \\whoami.exe",
+        "start_line": 13
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "Image",
+    "CommandLine"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-12-discovery-commands",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\whoami.exe\") and (process.command_line like \"*/priv*\" or process.command_line like \"*/groups*\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\whoami.exe\" and (ProcessCommandLine contains \"/priv\" or ProcessCommandLine contains \"/groups\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-019",
+      "sha256": "f24a3061fd025313ab66f5d9c33216f523111837da52355728032330ae0f975d"
+    },
+    {
+      "doc_id": "rb-12-discovery-commands",
+      "sha256": "20a6cafb1068a35b86d92729054882ebc69df1736cf00d98ca4148f9d3cfb96d"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "Local user discovery with whoami privileges",
+  "triage_tips": [
+    "Known false positive: admin troubleshooting.",
+    "Common first step after a foothold; check the host for other alerts.",
+    "Rule level is low."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 2,
+  "what_it_is": "Process creation rule for local user discovery: whoami.exe asked for privileges or groups.",
+  "why_it_flags": "Image ends with \\whoami.exe and CommandLine contains /priv or /groups."
+}

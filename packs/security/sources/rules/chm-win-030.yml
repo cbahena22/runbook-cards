@@ -1,0 +1,22 @@
+title: Remote service created for execution
+id: 543fac51-6083-5927-a8e4-8da83555e665
+name: chm-win-030
+status: test
+description: A process named by a random service launched from the Windows temp folder
+  through services.exe.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    ParentImage|endswith: \services.exe
+    Image|contains: \Windows\Temp\
+  condition: selection
+falsepositives:
+- None known
+level: high
+tags:
+- attack.execution
+- attack.t1569.002

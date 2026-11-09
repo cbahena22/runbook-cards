@@ -1,0 +1,11 @@
+{
+  "cost_usd": 1.58262,
+  "input_tokens": 408515,
+  "model": "claude-sonnet-5-5",
+  "output_tokens": 76559,
+  "price_per_mtok": [
+    2.0,
+    10.0
+  ],
+  "requests": 137
+}

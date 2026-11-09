@@ -1,0 +1,21 @@
+title: Remote desktop logon
+id: 49635188-777f-5d6b-9e00-36e2ebd3eac8
+name: chm-win-026
+status: test
+description: A successful logon (4624) of logon type 10.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4624
+    LogonType: 10
+  condition: selection
+falsepositives:
+- Admin remote sessions
+level: low
+tags:
+- attack.lateral_movement
+- attack.t1021.001

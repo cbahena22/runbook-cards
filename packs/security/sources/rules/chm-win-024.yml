@@ -1,0 +1,20 @@
+title: Local user account created
+id: a7b3828a-68ce-5d6d-89d3-55ac34484f4e
+name: chm-win-024
+status: test
+description: Security event 4720, a user account was created.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4720
+  condition: selection
+falsepositives:
+- Helpdesk onboarding
+level: medium
+tags:
+- attack.persistence
+- attack.t1136.001

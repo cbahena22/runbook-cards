@@ -1,0 +1,22 @@
+title: SSH password failure for root
+id: 4e9ad5e7-ee9f-5f63-be33-01f5e1075021
+name: chm-lin-027
+status: test
+description: A failed SSH password attempt for the root account.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  product: linux
+  service: auth
+detection:
+  selection:
+    program: sshd
+    message|contains:
+    - Failed password for root
+  condition: selection
+falsepositives:
+- Admin typing the wrong password
+level: medium
+tags:
+- attack.credential_access
+- attack.t1110.001

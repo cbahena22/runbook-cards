@@ -1,0 +1,135 @@
+{
+  "card_id": "sop-02-new-starter-laptop",
+  "checks": [
+    "Asset tag matches the inventory sheet.",
+    "Disk encryption shows as on."
+  ],
+  "citations": {
+    "checks[0]": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 14,
+        "quote": "Asset tag matches the inventory sheet",
+        "start_line": 14
+      }
+    ],
+    "checks[1]": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 14,
+        "quote": "disk encryption shows as on",
+        "start_line": 14
+      }
+    ],
+    "escalate_to": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 15,
+        "quote": "Escalate to: Desk manager",
+        "start_line": 15
+      }
+    ],
+    "steps[0]": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 7,
+        "quote": "Pick a laptop from the shelf marked READY.",
+        "start_line": 7
+      }
+    ],
+    "steps[1]": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 8,
+        "quote": "Run the imaging task from the deployment console.",
+        "start_line": 8
+      }
+    ],
+    "steps[2]": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 9,
+        "quote": "Join the device to the company domain.",
+        "start_line": 9
+      }
+    ],
+    "steps[3]": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 10,
+        "quote": "Create the user's mailbox from the starter ticket.",
+        "start_line": 10
+      }
+    ],
+    "steps[4]": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 11,
+        "quote": "Install the standard software bundle.",
+        "start_line": 11
+      }
+    ],
+    "steps[5]": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 12,
+        "quote": "Label the laptop with the asset tag and hand over.",
+        "start_line": 12
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 4,
+        "quote": "Purpose: prepare a laptop for a new starter.",
+        "start_line": 4
+      }
+    ],
+    "when_to_use": [
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 4,
+        "quote": "prepare a laptop for a new starter",
+        "start_line": 4
+      },
+      {
+        "doc_id": "sop-02-new-starter-laptop",
+        "end_line": 10,
+        "quote": "Create the user's mailbox from the starter ticket.",
+        "start_line": 10
+      }
+    ]
+  },
+  "escalate_to": "Desk manager",
+  "injection_found": [],
+  "kind": "procedure",
+  "model": "claude-sonnet-5-5",
+  "pack": "helpdesk",
+  "playbook_link": "sop-01-password-reset",
+  "prompt_version": "p2",
+  "source_shas": [
+    {
+      "doc_id": "sop-02-new-starter-laptop",
+      "sha256": "113c63d626a385ee438f80d0b275235e6ba59ac8113a7bd26750ce017a77698f"
+    },
+    {
+      "doc_id": "sop-01-password-reset",
+      "sha256": "0da2019fc7a5b7b7258fb39a77793e7d965ff4d540795feece2a67a4f10e834c"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "steps": [
+    "Pick a laptop from the shelf marked READY.",
+    "Run the imaging task from the deployment console.",
+    "Join the device to the company domain.",
+    "Create the user's mailbox from the starter ticket.",
+    "Install the standard software bundle.",
+    "Label the laptop with the asset tag and hand over."
+  ],
+  "title": "Prepare a laptop for a new starter",
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "Procedure to prepare a laptop for a new starter: image, domain join, mailbox, software, label and hand over.",
+  "when_to_use": "When a new starter needs a laptop prepared, working from the starter ticket."
+}

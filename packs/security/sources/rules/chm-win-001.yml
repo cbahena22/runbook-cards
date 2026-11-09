@@ -1,0 +1,25 @@
+title: Encoded PowerShell command line
+id: 8287ae89-d75e-577d-ae98-8be6c4e8fd83
+name: chm-win-001
+status: test
+description: A PowerShell process was started with an encoded command argument.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith:
+    - \powershell.exe
+    - \pwsh.exe
+    CommandLine|contains:
+    - ' -enc '
+    - ' -EncodedCommand '
+  condition: selection
+falsepositives:
+- Admin scripts that pass encoded blobs
+level: medium
+tags:
+- attack.execution
+- attack.t1059.001

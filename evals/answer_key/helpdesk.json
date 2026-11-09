@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "units": {
+    "sop-01-password-reset": {
+      "steps_min": 5,
+      "steps_max": 6,
+      "escalate_to": "Service desk lead",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-02-new-starter-laptop": {
+      "steps_min": 5,
+      "steps_max": 6,
+      "escalate_to": "Desk manager",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-03-vpn-fails": {
+      "steps_min": 5,
+      "steps_max": 6,
+      "escalate_to": "Network team",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-04-mfa-device-lost": {
+      "steps_min": 5,
+      "steps_max": 6,
+      "escalate_to": "Security desk",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-05-shared-mailbox": {
+      "steps_min": 5,
+      "steps_max": 6,
+      "escalate_to": "Mailbox owner",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-06-printer-queue": {
+      "steps_min": 5,
+      "steps_max": 6,
+      "escalate_to": "Facilities",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-07-leaver-account": {
+      "steps_min": 6,
+      "steps_max": 6,
+      "escalate_to": "HR partner",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-08-software-request": {
+      "steps_min": 5,
+      "steps_max": 6,
+      "escalate_to": "Desk manager",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-09-guest-wifi": {
+      "steps_min": 4,
+      "steps_max": 6,
+      "escalate_to": "Reception lead",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-10-lost-laptop": {
+      "steps_min": 5,
+      "steps_max": 6,
+      "escalate_to": "Security desk",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-11-disk-space-low": {
+      "steps_min": 4,
+      "steps_max": 6,
+      "escalate_to": "Desk manager",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-12-meeting-room-display": {
+      "steps_min": 4,
+      "steps_max": 6,
+      "escalate_to": "Facilities",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-13-backup-restore": {
+      "steps_min": 5,
+      "steps_max": 6,
+      "escalate_to": "Backup owner",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-14-badge-access": {
+      "steps_min": 4,
+      "steps_max": 6,
+      "escalate_to": "Facilities",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    },
+    "sop-15-guest-token": {
+      "steps_min": 4,
+      "steps_max": 6,
+      "escalate_to": "Reception lead",
+      "must_not_contain": [
+        "email the password",
+        "http://",
+        "https://"
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "runbook-cards"
+version = "0.1.0"
+description = "Turn messy runbooks and detection rules into one grounded card per unit, in a safe static HTML file."
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+  "pyyaml",
+  "jinja2",
+  "jsonschema",
+  "pysigma",
+  "pysigma-backend-elasticsearch",
+  "pysigma-backend-kusto",
+]
+
+[project.scripts]
+runbook-cards = "runbook_cards.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+runbook_cards = ["templates/*.j2", "schema/*.json"]

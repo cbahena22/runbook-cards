@@ -1,0 +1,23 @@
+title: Sudo used to open a root shell
+id: e893b347-376b-5e29-b46a-f681c9ac4c61
+name: chm-lin-028
+status: test
+description: sudo invoked to start a root shell.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  product: linux
+  service: auth
+detection:
+  selection:
+    program: sudo
+    message|contains:
+    - COMMAND=/bin/bash
+    - COMMAND=/bin/sh
+  condition: selection
+falsepositives:
+- Admins doing maintenance
+level: low
+tags:
+- attack.privilege_escalation
+- attack.t1548.003

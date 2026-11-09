@@ -1,0 +1,116 @@
+{
+  "attack": [
+    "T1136.001"
+  ],
+  "card_id": "chm-lin-029",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-lin-029",
+        "end_line": 13,
+        "quote": "program: useradd",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-lin-029",
+        "end_line": 14,
+        "quote": "message|contains:",
+        "start_line": 14
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "chm-lin-029",
+        "end_line": 18,
+        "quote": "Planned server builds",
+        "start_line": 17
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "chm-lin-029",
+        "end_line": 22,
+        "quote": "level: medium",
+        "start_line": 19
+      }
+    ],
+    "triage_tips[2]": [
+      {
+        "doc_id": "chm-lin-029",
+        "end_line": 5,
+        "quote": "useradd recorded in the authentication log.",
+        "start_line": 5
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-lin-029",
+        "end_line": 5,
+        "quote": "useradd recorded in the authentication log.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-lin-029",
+        "end_line": 15,
+        "quote": "program: useradd",
+        "start_line": 13
+      },
+      {
+        "doc_id": "chm-lin-029",
+        "end_line": 22,
+        "quote": "attack.t1136.001",
+        "start_line": 21
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "program",
+    "message"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": null,
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": "no ECS pipeline for non-Windows rules",
+      "field_map": {
+        "message": null,
+        "program": null
+      },
+      "query": null
+    },
+    "kql": {
+      "error": "SigmaTransformationError: Unable to determine table name from rule",
+      "field_map": {
+        "message": null,
+        "program": null
+      },
+      "query": null
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-lin-029",
+      "sha256": "d5732a8f27902332e8708eba134f94203ba55aa78bb49f5cded64579360ab794"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "New local user added on Linux",
+  "triage_tips": [
+    "Check whether this is a planned server build, the listed false positive.",
+    "Level is medium; the rule maps to persistence via a created local account.",
+    "Confirm who ran useradd and that the new account was expected."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "Alert for a new local user created on a Linux host: useradd recorded in the authentication log.",
+  "why_it_flags": "The auth log shows program useradd with a message containing \"new user\"; tagged persistence, create local account (t1136.001)."
+}

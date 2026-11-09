@@ -1,0 +1,51 @@
+{
+  "attack": [
+    "T1059.001",
+    "T1105"
+  ],
+  "card_id": "chm-win-002",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-01-powershell-alerts",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\powershell.exe\") and (process.command_line like \"*DownloadString*\" or process.command_line like \"*Invoke-WebRequest*\" or process.command_line like \"*IEX *\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\powershell.exe\" and (ProcessCommandLine contains \"DownloadString\" or ProcessCommandLine contains \"Invoke-WebRequest\" or ProcessCommandLine contains \"IEX \")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-002",
+      "sha256": "db21a48480f06547858f47c08394dccb4e3604098b497a2dce512e4ce01fa9b4"
+    },
+    {
+      "doc_id": "rb-01-powershell-alerts",
+      "sha256": "95be0682edc103c45d0faa5194f50d477c11242f968f80ffb10609f8a67e0387"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "error",
+  "title": "PowerShell download cradle",
+  "triage_tips": [],
+  "unsupported_after": 2,
+  "unsupported_before": 2,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

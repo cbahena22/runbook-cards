@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="{{ csp }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ heading }} - runbook cards</title>
+<style>{{ style }}</style>
+</head>
+<body>
+<header>
+<h1>{{ heading }}</h1>
+<p class="sub">{{ cards|length }} cards. Each one is checked against its source lines. Fictional client, synthetic data.</p>
+<label for="filter">Filter</label>
+<input id="filter" type="search" autocomplete="off" placeholder="title, id, technique">
+<p id="count" role="status">{{ cards|length }} of {{ cards|length }} cards</p>
+</header>
+<main>
+{% for c in cards %}
+<article class="card" id="card-{{ c.slug }}" data-q="{{ c.q }}">
+<h2>{{ c.title }}</h2>
+<p class="meta"><code>{{ c.card_id }}</code> · {{ c.kind }}{% if c.attack %} ·
+{% for a in c.attack %}{% if a.url %}<a href="{{ a.url }}" rel="noopener noreferrer">{{ a.id }}</a>{% else %}<span>{{ a.id }}</span>{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
+{% if c.needs_human %}
+<p class="banner" role="note">Needs a human: this card could not be fully grounded ({{ c.status_reason }}).</p>
+{% endif %}
+{% for f in c.fields %}
+<section>
+<h3>{{ f.label }}</h3>
+{% if f.rows is not none %}<ul>{% for i in f.rows %}<li>{{ i.text }}{% if i.refs %} <small class="refs">[{{ i.refs }}]</small>{% endif %}</li>{% endfor %}</ul>
+{% else %}<p>{{ f.text }}{% if f.refs %} <small class="refs">[{{ f.refs }}]</small>{% endif %}</p>{% endif %}
+</section>
+{% endfor %}
+{% if c.queries %}
+<section>
+<h3>Queries (built by code from the rule)</h3>
+{% for q in c.queries %}
+<h4>{{ q.label }}</h4>
+{% if q.query %}<pre><code>{{ q.query }}</code></pre>{% else %}<p class="muted">No query: {{ q.error }}</p>{% endif %}
+{% if q.field_map %}<p class="muted">Fields: {% for k, v in q.field_map %}{{ k }} → {{ v if v else "no mapping" }}{% if not loop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+{% endfor %}
+</section>
+{% endif %}
+{% if c.injection_found %}
+<section class="inj">
+<h3>Instruction-like text found in the source (not followed)</h3>
+<ul>{% for s in c.injection_found %}<li><code>{{ s.where }}</code>: <q>{{ s.quote }}</q></li>{% endfor %}</ul>
+</section>
+{% endif %}
+<p class="muted">Sources: {{ c.sources }}{% if c.playbook %} · Playbook: {% if c.playbook_anchor %}<a href="#card-{{ c.playbook_anchor }}">{{ c.playbook }}</a>{% else %}{{ c.playbook }}{% endif %}{% endif %}</p>
+</article>
+{% endfor %}
+</main>
+<footer>
+<p>ATT&amp;CK® is a registered trademark of The MITRE Corporation. Technique names are used under the
+<a href="https://attack.mitre.org/resources/legal-and-branding/terms-of-use/" rel="noopener noreferrer">ATT&amp;CK Terms of Use</a>.</p>
+</footer>
+<script>{{ script }}</script>
+</body>
+</html>

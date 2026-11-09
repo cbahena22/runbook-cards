@@ -1,0 +1,21 @@
+title: Failed network logon
+id: 454419e7-7607-5860-90c3-64d0645791ac
+name: chm-win-023
+status: test
+description: A failed logon (4625) of logon type 3, one event.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4625
+    LogonType: 3
+  condition: selection
+falsepositives:
+- Mistyped passwords, service accounts with old passwords
+level: low
+tags:
+- attack.credential_access
+- attack.t1110

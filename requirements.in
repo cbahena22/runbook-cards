@@ -1,0 +1,7 @@
+pyyaml
+jinja2
+jsonschema
+pysigma
+pysigma-backend-elasticsearch
+pysigma-backend-kusto
+anthropic

@@ -1,0 +1,23 @@
+title: Event logs cleared with wevtutil
+id: 0bc5079a-a202-540d-95d8-acbae6f62edb
+name: chm-win-015
+status: test
+description: wevtutil.exe run with the cl (clear-log) argument.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \wevtutil.exe
+    CommandLine|contains:
+    - ' cl '
+    - ' clear-log '
+  condition: selection
+falsepositives:
+- Log rotation scripts
+level: high
+tags:
+- attack.defense_evasion
+- attack.t1070.001

@@ -1,0 +1,1 @@
+from * metadata _id, _index, _version | where (ends_with(process.parent.executable.caseless, "\\winword.exe") or ends_with(process.parent.executable.caseless, "\\excel.exe")) and (ends_with(process.executable.caseless, "\\cmd.exe") or ends_with(process.executable.caseless, "\\powershell.exe"))

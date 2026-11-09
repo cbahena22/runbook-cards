@@ -1,0 +1,480 @@
+{
+  "version": 1,
+  "units": {
+    "chm-win-001": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1059.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-002": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1059.001",
+        "T1105"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-003": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1105"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-004": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1197"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-005": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1003.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-006": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1490"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-007": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1047"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-008": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1053.005"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-009": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1003.002"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-010": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1136.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-011": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1218.005"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-012": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1218.010"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-013": {
+      "key_fields": [
+        "ParentImage",
+        "Image"
+      ],
+      "attack": [
+        "T1204.002"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-014": {
+      "key_fields": [
+        "Image"
+      ],
+      "attack": [
+        "T1021.002"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-015": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1070.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-016": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1003.003"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-017": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1562.004"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-018": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1482"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-019": {
+      "key_fields": [
+        "Image",
+        "CommandLine"
+      ],
+      "attack": [
+        "T1033"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-020": {
+      "key_fields": [
+        "ScriptBlockText"
+      ],
+      "attack": [
+        "T1562.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-021": {
+      "key_fields": [
+        "ScriptBlockText"
+      ],
+      "attack": [
+        "T1562.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-022": {
+      "key_fields": [
+        "ScriptBlockText"
+      ],
+      "attack": [
+        "T1003.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-023": {
+      "key_fields": [
+        "EventID",
+        "LogonType"
+      ],
+      "attack": [
+        "T1110"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-024": {
+      "key_fields": [
+        "EventID"
+      ],
+      "attack": [
+        "T1136.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-025": {
+      "key_fields": [
+        "EventID"
+      ],
+      "attack": [
+        "T1070.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-win-026": {
+      "key_fields": [
+        "EventID",
+        "LogonType"
+      ],
+      "attack": [
+        "T1021.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    },
+    "chm-lin-027": {
+      "key_fields": [
+        "program",
+        "message"
+      ],
+      "attack": [
+        "T1110.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "powershell"
+      ]
+    },
+    "chm-lin-028": {
+      "key_fields": [
+        "program",
+        "message"
+      ],
+      "attack": [
+        "T1548.003"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "powershell"
+      ]
+    },
+    "chm-lin-029": {
+      "key_fields": [
+        "program",
+        "message"
+      ],
+      "attack": [
+        "T1136.001"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "powershell"
+      ]
+    },
+    "chm-win-030": {
+      "key_fields": [
+        "ParentImage",
+        "Image"
+      ],
+      "attack": [
+        "T1569.002"
+      ],
+      "must_not_contain": [
+        "mark as benign",
+        "no action needed",
+        "http://",
+        "https://",
+        "sudo"
+      ]
+    }
+  }
+}

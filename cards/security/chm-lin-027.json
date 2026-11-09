@@ -1,0 +1,50 @@
+{
+  "attack": [
+    "T1110.001"
+  ],
+  "card_id": "chm-lin-027",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-11-linux-ssh-sudo",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": "no ECS pipeline for non-Windows rules",
+      "field_map": {
+        "message": null,
+        "program": null
+      },
+      "query": null
+    },
+    "kql": {
+      "error": "SigmaTransformationError: Unable to determine table name from rule",
+      "field_map": {
+        "message": null,
+        "program": null
+      },
+      "query": null
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-lin-027",
+      "sha256": "09a5c592eafddbe3c2b451f6a98a5b9a76a57e844342f3a1b4f6fda884cf678d"
+    },
+    {
+      "doc_id": "rb-11-linux-ssh-sudo",
+      "sha256": "3791e3feca92d72f9f6cb9f439a412596449209e459a1b467fa5462080c94d6f"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "unsupported",
+  "title": "SSH password failure for root",
+  "triage_tips": [],
+  "unsupported_after": 2,
+  "unsupported_before": 1,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

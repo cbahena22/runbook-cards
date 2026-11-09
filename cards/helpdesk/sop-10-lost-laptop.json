@@ -1,0 +1,129 @@
+{
+  "card_id": "sop-10-lost-laptop",
+  "checks": [
+    "Sessions revoked.",
+    "Device flagged as lost."
+  ],
+  "citations": {
+    "checks[0]": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 14,
+        "quote": "Sessions revoked",
+        "start_line": 14
+      }
+    ],
+    "checks[1]": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 14,
+        "quote": "device flagged as lost",
+        "start_line": 14
+      }
+    ],
+    "escalate_to": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 15,
+        "quote": "Escalate to: Security desk",
+        "start_line": 15
+      }
+    ],
+    "steps[0]": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 7,
+        "quote": "Get the time and place the laptop was last seen.",
+        "start_line": 7
+      }
+    ],
+    "steps[1]": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 8,
+        "quote": "Disable the user's sessions in the directory console.",
+        "start_line": 8
+      }
+    ],
+    "steps[2]": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 9,
+        "quote": "Mark the device as lost in the device manager.",
+        "start_line": 9
+      }
+    ],
+    "steps[3]": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 10,
+        "quote": "Start a remote lock if the laptop is online.",
+        "start_line": 10
+      }
+    ],
+    "steps[4]": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 11,
+        "quote": "Tell the security desk straight away.",
+        "start_line": 11
+      }
+    ],
+    "steps[5]": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 12,
+        "quote": "Raise a ticket for a replacement laptop.",
+        "start_line": 12
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 4,
+        "quote": "Purpose: a laptop is reported lost or stolen.",
+        "start_line": 4
+      }
+    ],
+    "when_to_use": [
+      {
+        "doc_id": "sop-10-lost-laptop",
+        "end_line": 4,
+        "quote": "a laptop is reported lost or stolen",
+        "start_line": 4
+      }
+    ]
+  },
+  "escalate_to": "Security desk",
+  "injection_found": [],
+  "kind": "procedure",
+  "model": "claude-sonnet-5-5",
+  "pack": "helpdesk",
+  "playbook_link": "sop-04-mfa-device-lost",
+  "prompt_version": "p2",
+  "source_shas": [
+    {
+      "doc_id": "sop-10-lost-laptop",
+      "sha256": "306e55ddd4281a846c4e95633d9143fcf91d9bfb393b26c33d0103df3ac3bbaa"
+    },
+    {
+      "doc_id": "sop-04-mfa-device-lost",
+      "sha256": "2a7b5bf284a540fd9a98c64f4d9bccccd1b92a1fba0015cd20b0cd0c7345bebd"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "steps": [
+    "Get the time and place the laptop was last seen.",
+    "Disable the user's sessions in the directory console.",
+    "Mark the device as lost in the device manager.",
+    "Start a remote lock if the laptop is online.",
+    "Tell the security desk straight away.",
+    "Raise a ticket for a replacement laptop."
+  ],
+  "title": "A laptop is reported lost or stolen",
+  "unsupported_after": 0,
+  "unsupported_before": 1,
+  "what_it_is": "Procedure for handling a laptop that has been reported lost or stolen.",
+  "when_to_use": "Use when a laptop is reported lost or stolen."
+}

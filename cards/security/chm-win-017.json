@@ -1,0 +1,50 @@
+{
+  "attack": [
+    "T1562.004"
+  ],
+  "card_id": "chm-win-017",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-14-firewall-changes",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\netsh.exe\") and process.command_line like \"*advfirewall*\" and process.command_line like \"*state off*\""
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\netsh.exe\" and (ProcessCommandLine contains \"advfirewall\" and ProcessCommandLine contains \"state off\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-017",
+      "sha256": "5b19cc19e88d559d8c55a44130b024feeba5811f06be38befbd1368ffb3909ca"
+    },
+    {
+      "doc_id": "rb-14-firewall-changes",
+      "sha256": "937c4c087cb370d79dfb04a9e86268542ed83a76784b9d35fc7a02a138668806"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "unsupported",
+  "title": "Firewall turned off with netsh",
+  "triage_tips": [],
+  "unsupported_after": 1,
+  "unsupported_before": 2,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

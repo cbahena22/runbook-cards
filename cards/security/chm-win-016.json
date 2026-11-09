@@ -1,0 +1,50 @@
+{
+  "attack": [
+    "T1003.003"
+  ],
+  "card_id": "chm-win-016",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-03-credential-dumping",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\ntdsutil.exe\") and (process.command_line like \"*ifm*\" or process.command_line like \"*create full*\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\ntdsutil.exe\" and (ProcessCommandLine contains \"ifm\" or ProcessCommandLine contains \"create full\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-016",
+      "sha256": "c7f8fe49583c691448f50d12ef4a9949997dade234b71e4a2af42e124f8db77c"
+    },
+    {
+      "doc_id": "rb-03-credential-dumping",
+      "sha256": "9800a66eeb3643036e4a124e386a7fa2a59346726167cdd64f94e0235790af34"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "validator",
+  "title": "Ntdsutil snapshot or media creation",
+  "triage_tips": [],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

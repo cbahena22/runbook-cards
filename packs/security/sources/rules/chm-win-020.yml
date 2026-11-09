@@ -1,0 +1,22 @@
+title: Defender exclusion added by PowerShell
+id: 746765e5-4598-5a07-8fe6-959767612ca7
+name: chm-win-020
+status: test
+description: A script block adding a Microsoft Defender exclusion path.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: ps_script
+  product: windows
+detection:
+  selection:
+    ScriptBlockText|contains|all:
+    - Add-MpPreference
+    - ExclusionPath
+  condition: selection
+falsepositives:
+- Endpoint team onboarding scripts
+level: high
+tags:
+- attack.defense_evasion
+- attack.t1562.001

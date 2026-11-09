@@ -1,0 +1,114 @@
+{
+  "attack": [
+    "T1490"
+  ],
+  "card_id": "chm-win-006",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-006",
+        "end_line": 13,
+        "quote": "Image|endswith: \\vssadmin.exe",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-006",
+        "end_line": 14,
+        "quote": "CommandLine|contains|all:",
+        "start_line": 14
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "rb-04-ransomware-precursors",
+        "end_line": 8,
+        "quote": "Check the host for mass file renames after this.",
+        "start_line": 8
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "rb-04-ransomware-precursors",
+        "end_line": 9,
+        "quote": "Either the vssadmin or the wmic form triggers it.",
+        "start_line": 9
+      }
+    ],
+    "triage_tips[2]": [
+      {
+        "doc_id": "chm-win-006",
+        "end_line": 24,
+        "quote": "Backup software cleanup",
+        "start_line": 24
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-006",
+        "end_line": 5,
+        "quote": "vssadmin or wmic deleting shadow copies, a ransomware precursor.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-win-006",
+        "end_line": 21,
+        "quote": "CommandLine|contains|all:",
+        "start_line": 12
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "Image",
+    "CommandLine"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-04-ransomware-precursors",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\vssadmin.exe\") and process.command_line like \"*delete*\" and process.command_line like \"*shadows*\" or ends_with(process.executable.caseless, \"\\\\wmic.exe\") and process.command_line like \"*shadowcopy*\" and process.command_line like \"*delete*\""
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where (FolderPath endswith \"\\\\vssadmin.exe\" and (ProcessCommandLine contains \"delete\" and ProcessCommandLine contains \"shadows\")) or (FolderPath endswith \"\\\\wmic.exe\" and (ProcessCommandLine contains \"shadowcopy\" and ProcessCommandLine contains \"delete\"))"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-006",
+      "sha256": "22af87ecbfca6ebc9ef878757b52f2a51eae986184f47cff9785870b5b8e232d"
+    },
+    {
+      "doc_id": "rb-04-ransomware-precursors",
+      "sha256": "461998d7885fcd1eda594c8f7d635a5202a19ca7d99f719931152278d93f64cb"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "Shadow copies deleted",
+  "triage_tips": [
+    "Check the host for mass file renames after this alert.",
+    "Either the vssadmin or the wmic form triggers it.",
+    "Known false positive: backup software cleanup."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "Sigma rule chm-win-006 (critical, test status): vssadmin or wmic deleting shadow copies, a ransomware precursor.",
+  "why_it_flags": "Process creation where vssadmin.exe has delete and shadows, or wmic.exe has shadowcopy and delete, in the command line."
+}

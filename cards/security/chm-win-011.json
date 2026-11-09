@@ -1,0 +1,50 @@
+{
+  "attack": [
+    "T1218.005"
+  ],
+  "card_id": "chm-win-011",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-07-signed-binary-proxy",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\mshta.exe\") and (process.command_line like \"*http://*\" or process.command_line like \"*https://*\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\mshta.exe\" and (ProcessCommandLine contains \"http://\" or ProcessCommandLine contains \"https://\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-011",
+      "sha256": "f78652147c8d8b914d73d54cd2fb4f90f9846d91cf4e2d96c36d10bff2074c73"
+    },
+    {
+      "doc_id": "rb-07-signed-binary-proxy",
+      "sha256": "0293354e84f1b60bc185f21d3ea5276fa3b1fe07042695e36c3e5376d9d86afd"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "validator",
+  "title": "Mshta running remote content",
+  "triage_tips": [],
+  "unsupported_after": 1,
+  "unsupported_before": 1,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

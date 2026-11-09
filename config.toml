@@ -1,0 +1,26 @@
+# Model id, prompt version and price table for the drafting run.
+# The prices are per million tokens, non-batch, and are the figures the budget bound uses.
+# Model id and list price re-checked 2026-10-28 against the Anthropic API model table:
+# claude-sonnet-5-5 is $2 input / $10 output per MTok. Re-check both before a live run.
+[model]
+id = "claude-sonnet-5-5"
+prompt_version = "p2"
+schema_version = "2"
+
+# Observed: a forced tool_choice returned HTTP 400 with claude-sonnet-5-5 while thinking was on, and thinking spends max_tokens.
+# auto + a prompt that asks for the one tool call, and thinking = between_tools (no thinking), avoid both.
+[request]
+tool_choice = "auto"
+thinking = "between_tools"
+strict = false  # strict: true failed with 400 "compiled grammar is too large" on the card schema (probe 2026-10-29); our validator still checks every card
+
+[price_per_mtok]
+input = 2.0
+output = 10.0
+
+[limits]
+draft_max_tokens = 3000
+grounding_max_tokens = 400
+concurrency = 2
+batch_cap_seconds = 7200
+batch_poll_seconds = 30

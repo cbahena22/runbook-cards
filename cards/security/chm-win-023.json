@@ -1,0 +1,120 @@
+{
+  "attack": [
+    "T1110"
+  ],
+  "card_id": "chm-win-023",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-023",
+        "end_line": 13,
+        "quote": "EventID: 4625",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-023",
+        "end_line": 14,
+        "quote": "LogonType: 3",
+        "start_line": 14
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "rb-10-logon-events",
+        "end_line": 8,
+        "quote": "One event is noise. Count them per source and account.",
+        "start_line": 8
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "chm-win-023",
+        "end_line": 17,
+        "quote": "Mistyped passwords, service accounts with old passwords",
+        "start_line": 17
+      }
+    ],
+    "triage_tips[2]": [
+      {
+        "doc_id": "rb-10-logon-events",
+        "end_line": 11,
+        "quote": "Old field names: proc_cmdline, src_ip, usr_name (do not use)",
+        "start_line": 11
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-023",
+        "end_line": 5,
+        "quote": "A failed logon (4625) of logon type 3, one event.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-win-023",
+        "end_line": 21,
+        "quote": "Mistyped passwords, service accounts with old passwords",
+        "start_line": 17
+      },
+      {
+        "doc_id": "chm-win-023",
+        "end_line": 21,
+        "quote": "attack.t1110",
+        "start_line": 21
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "EventID",
+    "LogonType"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-10-logon-events",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "EventID": "event.code",
+        "LogonType": "winlog.event_data.LogonType"
+      },
+      "query": "from * metadata _id, _index, _version | where winlog.channel==\"Security\" and event.code==\"4625\" and winlog.event_data.LogonType==\"3\""
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "EventID": null,
+        "LogonType": null
+      },
+      "query": "DeviceLogonEvents\n| where LogonType == 3"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-023",
+      "sha256": "bcbd6bb30b0b6eca763e34c06f67aabd2f1e1d4cbb23884bad2fb992700499b1"
+    },
+    {
+      "doc_id": "rb-10-logon-events",
+      "sha256": "2c49db2ec96cf36ede9d60511c69c5858f8f3d13e760315538eaabdfa23db6f5"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "Failed network logon",
+  "triage_tips": [
+    "One event is noise; count failures per source and account.",
+    "Likely benign: mistyped passwords or service accounts with old passwords.",
+    "Do not use old field names (proc_cmdline, src_ip, usr_name) from the old runbook."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "Low-severity rule that fires on a single failed Windows logon (event 4625) of logon type 3 (network).",
+  "why_it_flags": "Failed network logons can indicate password guessing (credential access, T1110), but one event is usually noise such as mistyped passwords."
+}

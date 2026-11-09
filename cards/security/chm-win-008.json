@@ -1,0 +1,50 @@
+{
+  "attack": [
+    "T1053.005"
+  ],
+  "card_id": "chm-win-008",
+  "citations": {},
+  "injection_found": [],
+  "key_fields": [],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-06-persistence-accounts",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\schtasks.exe\") and process.command_line like \"*/create*\" and process.command_line like \"*\\\\AppData\\\\*\""
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\schtasks.exe\" and (ProcessCommandLine contains \"/create\" and ProcessCommandLine contains \"\\\\AppData\\\\\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-008",
+      "sha256": "33acd32df5c3018fd44bd553d1e016226f0ea1f4dc64ffb65eee13c968f73f5b"
+    },
+    {
+      "doc_id": "rb-06-persistence-accounts",
+      "sha256": "267c0e8acf8f1dd3c0397e8f2a7550a8918d7643c896a23afc5af9016eb05473"
+    }
+  ],
+  "status": "needs human",
+  "status_reason": "unsupported",
+  "title": "Scheduled task created from a user folder",
+  "triage_tips": [],
+  "unsupported_after": 1,
+  "unsupported_before": 1,
+  "what_it_is": "",
+  "why_it_flags": ""
+}

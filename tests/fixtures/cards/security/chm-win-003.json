@@ -1,0 +1,94 @@
+{
+  "attack": [
+    "T1105"
+  ],
+  "card_id": "chm-win-003",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-003",
+        "end_line": 13,
+        "quote": "Image|endswith",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-003",
+        "end_line": 14,
+        "quote": "CommandLine|contains",
+        "start_line": 14
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "rb-02-file-transfer-tricks",
+        "end_line": 9,
+        "quote": "Key fields: Image, CommandLine (urlcache or verifyctl).",
+        "start_line": 9
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-003",
+        "end_line": 5,
+        "quote": "certutil.exe with urlcache or verifyctl arguments, a known download trick.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "rb-02-file-transfer-tricks",
+        "end_line": 8,
+        "quote": "certutil is normally for certificates, not downloads.",
+        "start_line": 8
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "Image",
+    "CommandLine"
+  ],
+  "kind": "alert",
+  "model": "fixture",
+  "pack": "security",
+  "playbook_link": "rb-02-file-transfer-tricks",
+  "prompt_version": "fixture",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\certutil.exe\") and (process.command_line like \"*urlcache*\" or process.command_line like \"*verifyctl*\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\certutil.exe\" and (ProcessCommandLine contains \"urlcache\" or ProcessCommandLine contains \"verifyctl\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-003",
+      "sha256": "4a54cdcd801f9a12a32f79d8606d1f5a31638cc053238eacdd2f75ae6bb40265"
+    },
+    {
+      "doc_id": "rb-02-file-transfer-tricks",
+      "sha256": "2ffe294e6d6a74c5c154264f8225fb80c16693ab0de63b47ae2c6e080e5eb06c"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "Certutil used to fetch a file",
+  "triage_tips": [
+    "Key fields: Image, CommandLine (urlcache or verifyctl)."
+  ],
+  "what_it_is": "certutil.exe with urlcache or verifyctl arguments, a known download trick.",
+  "why_it_flags": "certutil is normally for certificates, not downloads."
+}

@@ -1,0 +1,28 @@
+title: Shadow copies deleted
+id: e3e3054a-bbce-529b-919e-c40f29205f24
+name: chm-win-006
+status: test
+description: vssadmin or wmic deleting shadow copies, a ransomware precursor.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_vss:
+    Image|endswith: \vssadmin.exe
+    CommandLine|contains|all:
+    - delete
+    - shadows
+  selection_wmic:
+    Image|endswith: \wmic.exe
+    CommandLine|contains|all:
+    - shadowcopy
+    - delete
+  condition: 1 of selection_*
+falsepositives:
+- Backup software cleanup
+level: critical
+tags:
+- attack.impact
+- attack.t1490

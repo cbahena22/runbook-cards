@@ -1,0 +1,22 @@
+title: AMSI bypass string in a script block
+id: 449e641d-db1b-5124-90a2-29aafbcdd1ac
+name: chm-win-021
+status: test
+description: A script block that touches the AmsiUtils class.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: ps_script
+  product: windows
+detection:
+  selection:
+    ScriptBlockText|contains:
+    - AmsiUtils
+    - amsiInitFailed
+  condition: selection
+falsepositives:
+- Security researchers on test hosts
+level: high
+tags:
+- attack.defense_evasion
+- attack.t1562.001

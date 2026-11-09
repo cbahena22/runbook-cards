@@ -1,0 +1,111 @@
+{
+  "attack": [
+    "T1197"
+  ],
+  "card_id": "chm-win-004",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-004",
+        "end_line": 13,
+        "quote": "Image|endswith: \\bitsadmin.exe",
+        "start_line": 13
+      }
+    ],
+    "key_fields[1]": [
+      {
+        "doc_id": "chm-win-004",
+        "end_line": 14,
+        "quote": "CommandLine|contains:",
+        "start_line": 14
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "chm-win-004",
+        "end_line": 19,
+        "quote": "Legacy update scripts",
+        "start_line": 18
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "rb-02-file-transfer-tricks",
+        "end_line": 16,
+        "quote": "BITS jobs survive a reboot, so ask about persistence.",
+        "start_line": 16
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-004",
+        "end_line": 5,
+        "quote": "bitsadmin.exe creating a transfer job.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-win-004",
+        "end_line": 16,
+        "quote": "CommandLine|contains:",
+        "start_line": 13
+      },
+      {
+        "doc_id": "chm-win-004",
+        "end_line": 23,
+        "quote": "attack.t1197",
+        "start_line": 20
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "Image",
+    "CommandLine"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-02-file-transfer-tricks",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "process.command_line",
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\bitsadmin.exe\") and (process.command_line like \"*/transfer*\" or process.command_line like \"*/addfile*\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "CommandLine": "ProcessCommandLine",
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\bitsadmin.exe\" and (ProcessCommandLine contains \"/transfer\" or ProcessCommandLine contains \"/addfile\")"
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-004",
+      "sha256": "74bee64e9975bfb19b6de35f7a301b4667ce9e9f262b803121a9e0b164066279"
+    },
+    {
+      "doc_id": "rb-02-file-transfer-tricks",
+      "sha256": "2ffe294e6d6a74c5c154264f8225fb80c16693ab0de63b47ae2c6e080e5eb06c"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "Bitsadmin transfer job",
+  "triage_tips": [
+    "Known false positive: legacy update scripts. Check whether the job comes from one.",
+    "BITS jobs survive a reboot, so ask about persistence."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "Process-creation alert for bitsadmin.exe creating a BITS transfer job.",
+  "why_it_flags": "Image ends with \\bitsadmin.exe and CommandLine contains /transfer or /addfile. Tagged defense evasion, t1197. Level medium."
+}

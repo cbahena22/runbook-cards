@@ -1,0 +1,26 @@
+title: PowerShell download cradle
+id: 2edbf684-efb6-501d-908e-562a0e25356c
+name: chm-win-002
+status: test
+description: PowerShell command line that downloads and runs content in memory.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: \powershell.exe
+    CommandLine|contains:
+    - DownloadString
+    - Invoke-WebRequest
+    - 'IEX '
+  condition: selection
+falsepositives:
+- Software installers run by IT
+level: high
+tags:
+- attack.execution
+- attack.t1059.001
+- attack.command_and_control
+- attack.t1105

@@ -1,0 +1,138 @@
+{
+  "card_id": "sop-03-vpn-fails",
+  "checks": [
+    "Account unlocked",
+    "Client version is the current one",
+    "Clock is within a minute"
+  ],
+  "citations": {
+    "checks[0]": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 14,
+        "quote": "Account unlocked",
+        "start_line": 14
+      }
+    ],
+    "checks[1]": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 14,
+        "quote": "client version is the current one",
+        "start_line": 14
+      }
+    ],
+    "checks[2]": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 14,
+        "quote": "clock is within a minute",
+        "start_line": 14
+      }
+    ],
+    "escalate_to": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 15,
+        "quote": "Escalate to: Network team",
+        "start_line": 15
+      }
+    ],
+    "steps[0]": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 7,
+        "quote": "Ask whether other websites work on the user's home network.",
+        "start_line": 7
+      }
+    ],
+    "steps[1]": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 8,
+        "quote": "Check that the user's account is not locked.",
+        "start_line": 8
+      }
+    ],
+    "steps[2]": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 9,
+        "quote": "Ask the user to restart the VPN client.",
+        "start_line": 9
+      }
+    ],
+    "steps[3]": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 10,
+        "quote": "Reinstall the VPN client from the software centre.",
+        "start_line": 10
+      }
+    ],
+    "steps[4]": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 11,
+        "quote": "Check the time on the laptop is correct.",
+        "start_line": 11
+      }
+    ],
+    "steps[5]": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 12,
+        "quote": "If it still fails, send the client log to the network team.",
+        "start_line": 12
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 4,
+        "quote": "Purpose: vpn will not connect.",
+        "start_line": 4
+      }
+    ],
+    "when_to_use": [
+      {
+        "doc_id": "sop-03-vpn-fails",
+        "end_line": 4,
+        "quote": "Purpose: vpn will not connect.",
+        "start_line": 4
+      }
+    ]
+  },
+  "escalate_to": "Network team",
+  "injection_found": [],
+  "kind": "procedure",
+  "model": "claude-sonnet-5-5",
+  "pack": "helpdesk",
+  "playbook_link": "sop-04-mfa-device-lost",
+  "prompt_version": "p2",
+  "source_shas": [
+    {
+      "doc_id": "sop-03-vpn-fails",
+      "sha256": "6da0a4ea190f780ef1c5aba79ff691238f6a28309fc5916e9dcda9097494b240"
+    },
+    {
+      "doc_id": "sop-04-mfa-device-lost",
+      "sha256": "2a7b5bf284a540fd9a98c64f4d9bccccd1b92a1fba0015cd20b0cd0c7345bebd"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "steps": [
+    "Ask whether other websites work on the user's home network.",
+    "Check that the user's account is not locked.",
+    "Ask the user to restart the VPN client.",
+    "Reinstall the VPN client from the software centre.",
+    "Check the time on the laptop is correct.",
+    "If it still fails, send the client log to the network team."
+  ],
+  "title": "VPN will not connect",
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "SOP for when a user's VPN will not connect.",
+  "when_to_use": "Use when the VPN will not connect."
+}

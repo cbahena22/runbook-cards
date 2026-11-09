@@ -1,0 +1,109 @@
+{
+  "attack": [
+    "T1021.002"
+  ],
+  "card_id": "chm-win-014",
+  "citations": {
+    "key_fields[0]": [
+      {
+        "doc_id": "chm-win-014",
+        "end_line": 13,
+        "quote": "Image|endswith: \\PSEXESVC.exe",
+        "start_line": 13
+      }
+    ],
+    "triage_tips[0]": [
+      {
+        "doc_id": "rb-05-lateral-movement",
+        "end_line": 15,
+        "quote": "Check who ran PsExec and from which host.",
+        "start_line": 15
+      }
+    ],
+    "triage_tips[1]": [
+      {
+        "doc_id": "chm-win-014",
+        "end_line": 16,
+        "quote": "Sanctioned admin use of PsExec",
+        "start_line": 16
+      }
+    ],
+    "triage_tips[2]": [
+      {
+        "doc_id": "chm-win-014",
+        "end_line": 20,
+        "quote": "attack.lateral_movement",
+        "start_line": 19
+      }
+    ],
+    "what_it_is": [
+      {
+        "doc_id": "chm-win-014",
+        "end_line": 5,
+        "quote": "A process named psexesvc.exe, left on a target by PsExec.",
+        "start_line": 5
+      }
+    ],
+    "why_it_flags": [
+      {
+        "doc_id": "chm-win-014",
+        "end_line": 13,
+        "quote": "Image|endswith: \\PSEXESVC.exe",
+        "start_line": 13
+      },
+      {
+        "doc_id": "chm-win-014",
+        "end_line": 17,
+        "quote": "level: medium",
+        "start_line": 17
+      }
+    ]
+  },
+  "injection_found": [],
+  "key_fields": [
+    "Image"
+  ],
+  "kind": "alert",
+  "model": "claude-sonnet-5-5",
+  "pack": "security",
+  "playbook_link": "rb-05-lateral-movement",
+  "prompt_version": "p2",
+  "queries": {
+    "esql": {
+      "error": null,
+      "field_map": {
+        "Image": "process.executable.caseless"
+      },
+      "query": "from * metadata _id, _index, _version | where ends_with(process.executable.caseless, \"\\\\PSEXESVC.exe\")"
+    },
+    "kql": {
+      "error": null,
+      "field_map": {
+        "Image": "FolderPath"
+      },
+      "query": "DeviceProcessEvents\n| where FolderPath endswith \"\\\\PSEXESVC.exe\""
+    }
+  },
+  "source_shas": [
+    {
+      "doc_id": "chm-win-014",
+      "sha256": "aa61cdc1df0d411cc0ebcde54aa06470d2335c4b4c4ae5622aa62e43a2d824d8"
+    },
+    {
+      "doc_id": "rb-05-lateral-movement",
+      "sha256": "fb9bbc8865eadc57e04951d842c188c50d232982c084133ffaefbd6ec0238ba9"
+    }
+  ],
+  "status": "grounded",
+  "status_reason": null,
+  "title": "PsExec service binary started",
+  "triage_tips": [
+    "Check who ran PsExec and from which host.",
+    "Known false positive: sanctioned admin use of PsExec.",
+    "Rule is tagged lateral movement (attack.t1021.002), so look for other hosts reached."
+  ],
+  "unsupported_after": 0,
+  "unsupported_before": 0,
+  "what_it_is": "Process-creation alert for a process named psexesvc.exe, the service binary PsExec leaves on a target host.",
+  "why_it_flags": "Fires when a process Image ends with \\PSEXESVC.exe, which suggests PsExec-based lateral movement (medium severity)."
+}

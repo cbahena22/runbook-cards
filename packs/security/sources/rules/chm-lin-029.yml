@@ -1,0 +1,22 @@
+title: New local user added on Linux
+id: cd69c571-516e-572b-8b6f-bc543c1a4717
+name: chm-lin-029
+status: test
+description: useradd recorded in the authentication log.
+author: Calder Health MSSP detection team (fictional)
+date: '2026-10-01'
+logsource:
+  product: linux
+  service: auth
+detection:
+  selection:
+    program: useradd
+    message|contains:
+    - new user
+  condition: selection
+falsepositives:
+- Planned server builds
+level: medium
+tags:
+- attack.persistence
+- attack.t1136.001
